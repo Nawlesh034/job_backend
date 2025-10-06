@@ -11,9 +11,14 @@ import cookieParser from "cookie-parser";
 const app = express()
 
 // Middleware
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://job-frontend-snowy.vercel.app"
+];
+
 app.use(cors({
-  origin:"http://localhost:5173",            // exact origin — NOT '*'
-  credentials: true,             // allow cookies to be sent/received
+  origin: allowedOrigins, // array of allowed origins
+  credentials: true,
   methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
   allowedHeaders: ["Content-Type","Authorization"],
 }));
