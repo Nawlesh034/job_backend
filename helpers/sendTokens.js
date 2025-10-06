@@ -5,10 +5,11 @@ export const sendToken = (res, user, statusCode = 200) => {
 
   const cookieOptions = {
     httpOnly: true,
-    sameSite: "lax", // changed from 'strict' to 'lax' for better compatibility
-    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // 'none' for cross-site in production
+    secure: process.env.NODE_ENV === "production", // true for HTTPS
     maxAge: 1 * 60 * 60 * 1000, // 1 hour (ms)
     path: "/",
+    domain: process.env.NODE_ENV === "production" ? undefined : undefined, // let browser handle domain
   };
 
   // set cookie and send basic user info (no password)
