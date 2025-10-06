@@ -5,7 +5,7 @@ export const sendToken = (res, user, statusCode = 200) => {
 
   const cookieOptions = {
     httpOnly: true,
-    sameSite: "strict", // change to 'lax' if you need cross-site GETs
+    sameSite: "lax", // changed from 'strict' to 'lax' for better compatibility
     secure: process.env.NODE_ENV === "production",
     maxAge: 1 * 60 * 60 * 1000, // 1 hour (ms)
     path: "/",
