@@ -1,0 +1,92 @@
+# --------------------------------------------------
+# Node.js dependencies
+# --------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# --------------------------------------------------
+# Build / Output directories
+# --------------------------------------------------
+dist/
+build/
+.next/
+out/
+coverage/
+tmp/
+temp/
+.cache/
+.vite/
+.DS_Store
+
+# --------------------------------------------------
+# Environment variables
+# --------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# --------------------------------------------------
+# Logs
+# --------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# --------------------------------------------------
+# VSCode / JetBrains / Editor files
+# --------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --------------------------------------------------
+# OS generated files
+# --------------------------------------------------
+Thumbs.db
+.DS_Store
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# --------------------------------------------------
+# Test and coverage outputs
+# --------------------------------------------------
+coverage/
+*.lcov
+
+# --------------------------------------------------
+# TypeScript build output
+# --------------------------------------------------
+*.tsbuildinfo
+
+# --------------------------------------------------
+# Local serverless / AWS / Firebase
+# --------------------------------------------------
+.serverless/
+.firebase/
+.vercel/
+.netlify/
+
+# --------------------------------------------------
+# Misc
+# --------------------------------------------------
+*.pid
+*.seed
+*.pid.lock
+
+# --------------------------------------------------
+# Uploads or user data (if any)
+# --------------------------------------------------
+uploads/
+public/uploads/
