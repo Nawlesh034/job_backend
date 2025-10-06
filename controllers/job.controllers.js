@@ -16,6 +16,7 @@ export const createJob = async (req, res) => {
       title,
       companyName,
       location,
+      locations, // New multiple locations field
       jobType,
       salaryRange,
       description,
@@ -26,15 +27,21 @@ export const createJob = async (req, res) => {
     } = req.body;
 
     // Basic validation
-    if (!title || !companyName || !location || !jobType || !description) {
+    if (!title || !companyName || !jobType || !description) {
       return res.status(400).json({ message: "Required fields are missing." });
+    }
+
+    // Validate that either location or locations is provided
+    if (!location && (!locations || locations.length === 0)) {
+      return res.status(400).json({ message: "At least one location is required." });
     }
 
     // Create new job document
     const newJob = new Job({
       title,
       companyName,
-      location,
+      location: location || (locations && locations.length > 0 ? locations[0] : ""), // Primary location
+      locations: locations || (location ? [location] : []), // Multiple locations
       jobType,
       salaryRange,
       description,

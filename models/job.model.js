@@ -11,7 +11,8 @@ const jobSchema = new mongoose.Schema(
   {
     title: { type: String, required: true, trim: true },
     companyName: { type: String, required: true, trim: true },
-    location: { type: String, required: true, trim: true },
+    location: { type: String, required: true, trim: true }, // Keep for backward compatibility
+    locations: { type: [String], default: [], trim: true }, // New multiple locations field
     jobType: {
       type: String,
       enum: ["Full-time", "Part-time", "Contract", "Internship"],
@@ -45,9 +46,11 @@ jobSchema.index({
   companyName: "text",
   description: "text",
   location: "text",
+  locations: "text",
 });
 
 // Compound index for filtering
 jobSchema.index({ jobType: 1, location: 1, isPublished: 1 });
+jobSchema.index({ jobType: 1, locations: 1, isPublished: 1 });
 
 export default mongoose.model("Job", jobSchema);
