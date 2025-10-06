@@ -4,9 +4,11 @@ import jwt from "jsonwebtoken";
 export const auth = (req, res, next) => {
   try {
     const token = req.cookies?.token;
+    console.log("Auth middleware - token present:", !!token);
     if (!token) return res.status(401).json({ success:false, message: "No token, authorization denied" });
 
     const decoded = jwt.verify(token, process.env.SECRET);
+    console.log("Auth middleware - decoded token:", decoded);
     // optional: check tokenVersion in DB
     // const user = await User.findById(decoded.id);
     // if (!user || user.tokenVersion !== decoded.tokenVersion) return res.status(401).json({ message: 'Token revoked' });

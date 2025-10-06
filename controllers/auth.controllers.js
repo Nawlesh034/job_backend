@@ -40,21 +40,25 @@ export const register = async (req, res) => {
 
 export const login =async(req,res)=>{
     const {email,password} = req.body;
+    console.log("Login attempt for email:", email);
     try{
        if(!email || !password){
         return res.status(400).json({message:"email or password is required"})
        }
        const user = await User.findOne({email})
+       console.log("User found:", !!user, user?.role);
        if(!user){
         return res.status(400).json({message:"User not found"})
        }
 
        const isMatched = await bcrypt.compare(password,user.password)
+       console.log("Password match:", isMatched);
 
        if(!isMatched){
         return res.status(400).json({message:"password is wrong"})
        }
 
+       console.log("Login successful, sending token for user:", user._id, user.role);
        // set auth cookie and return user via helper
        sendToken(res, user, 200);
        return;
@@ -85,7 +89,9 @@ export const logout = (req, res) => {
 };
 
 export const me = (req, res) => {
+  console.log("Me endpoint called, req.user:", req.user);
   if (!req.user) return res.status(401).json({ success: false, message: "Unauthorized" });
   const { id, email, role } = req.user;
+  console.log("Returning user data:", { id, email, role });
   return res.status(200).json({ success: true, user: { id, email, role } });
 };
